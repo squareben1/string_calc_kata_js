@@ -6,10 +6,13 @@ class StringCalc {
       var numbers = string.substring(3).split(char)
     } else {
       var numbers = string.split(/\,|\n/) 
-      console.log("normal")
-      console.log(numbers)
     }
-    
+    for (var i = 0; i < numbers.length; i++) {
+      if (numbers[i] < 0) {
+        throw "negatives not allowed"
+      }
+    }
+
     var total = 0
 
     if(string.length < 1) {

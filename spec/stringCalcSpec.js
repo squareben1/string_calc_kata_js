@@ -19,5 +19,10 @@ describe('StringCalc', function() {
     it('should allow user to select own delimiter if first 2 chars are //', function() {
       expect(calc.add("//;\n1;2")).toEqual(3)
     })
+    it('it should throw exception if negative num', function() {
+      expect(function() {
+        calc.add("-1")
+      }).toThrow("negatives not allowed")
+    })
   })
 })
