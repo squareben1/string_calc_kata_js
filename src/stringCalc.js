@@ -7,11 +7,18 @@ class StringCalc {
     } else {
       var numbers = string.split(/\,|\n/) 
     }
-    for (var i = 0; i < numbers.length; i++) {
-      if (numbers[i] < 0) {
-        throw "negatives not allowed"
+    let hasNegative = numbers.some(v => v < 0);
+
+    if (hasNegative == true) {
+      var errorString = "negatives not allowed: "
+      for (var i = 0; i < numbers.length; i++) {
+        if (numbers[i] < 0) {
+          errorString = errorString.concat(`${numbers[i]}`)
+        }
       }
+      throw errorString
     }
+      
 
     var total = 0
 
