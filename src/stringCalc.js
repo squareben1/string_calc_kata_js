@@ -1,8 +1,8 @@
 class StringCalc {
   add(string) {
-    var numbers = string.split(',')
+    var numbers = string.split(/\,|\n/) 
     var total = 0
-    
+
     if(string.length < 1) {
       return 0
     } else if (string.length === 1) {
