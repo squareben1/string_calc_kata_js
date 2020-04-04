@@ -22,5 +22,8 @@ describe('StringCalc Feature', function() {
     it("should allow delimeters to be any length", function () {
       expect(calc.add("//[***]\n1***2***3")).toEqual(6)
     })
+    it("should allow multiple delimeters", function () {
+      expect(calc.add("//[*][%]\n1*2%3")).toEqual(6)
+    })
   })
 })

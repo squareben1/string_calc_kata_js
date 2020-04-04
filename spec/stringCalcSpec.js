@@ -38,6 +38,9 @@ describe("StringCalc", function () {
     it("should allow delimeters to be any length", function () {
       expect(calc.splitString("//[***]\n1***2***3")).toEqual(["1", "2", "3"])
     })
+    it("should allow multiple delimeters", function() {
+      expect(calc.splitString("//[*][%]\n1*2%3")).toEqual(["1", "2", "3"])
+    })
   })
 
   describe('#intifyArray', function() {

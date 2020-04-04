@@ -18,8 +18,20 @@ class StringCalc {
         string.lastIndexOf("[")+1, 
         string.lastIndexOf("]")
       )
-      var strippedString = string.replace(/(\r\n|\n|\r)/gm, "")
-      return strippedString.substring(char.length+4).split(char)
+      var bracketCount = string.split('[').length-1
+      
+      if (bracketCount > 1) {
+        var newString = string.substring(0, char.length+4)
+        var charTwo = newString.substring(
+          newString.lastIndexOf("[")+1, 
+          newString.lastIndexOf("]")
+        )
+        var strippedString = string.substring(char.length+4).replace(/(\r\n|\n|\r)/gm, "")
+        return strippedString.substring(char.length+2).replace(charTwo, char).split(char)
+      } else {
+        var strippedString = string.substring(char.length+4).replace(/(\r\n|\n|\r)/gm, "")
+        return strippedString.split(char)
+      }
     } else {
       return string.split(/\,|\n/) 
     }
