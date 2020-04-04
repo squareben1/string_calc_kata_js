@@ -1,5 +1,4 @@
 class StringCalc {
-
   negativeCheck(numbers) {
     let hasNegative = numbers.some(v => v < 0);
     if (hasNegative == true) {
@@ -24,20 +23,36 @@ class StringCalc {
   }
   
   add(string) {
-    var numbers = this.splitString(string)
-    this.negativeCheck(numbers)
+    var numbersOneThousand = this.intifyArray(this.splitString(string))
+    this.negativeCheck(numbersOneThousand)
+    var numbers = this.ignoreThousands(numbersOneThousand)
     var total = 0
 
     if(string.length < 1) {
       return 0
     } else if (string.length === 1) {
-      return parseInt(string, 10)
+      return numbers[0]
     } else {
       for (var i = 0; i < numbers.length; i++) {
-        total += parseInt(numbers[i], 10)
+        total += numbers[i]
       }
       return total
     }
+  }
+
+  intifyArray(array) {
+    var integerArray = []
+    for (var i = 0; i < array.length; i++) {
+      integerArray.push(parseInt(array[i], 10))
+    }
+    return integerArray
+  }
+
+  ignoreThousands(numbers) {
+    function checkNum(num) {
+      return num < 1000;
+    }
+    return numbers.filter(checkNum)
   }
 }
 

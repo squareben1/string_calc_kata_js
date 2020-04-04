@@ -16,5 +16,8 @@ describe('StringCalc Feature', function() {
     it('should allow user to select own delimiter if first 2 chars are //', function() {
       expect(calc.add("//;\n1;2")).toEqual(3)
     })
+    it("It should ignore any numbers higher than 1000", function () {
+      expect(calc.add("1001,2")).toEqual(2);
+    });
   })
 })
