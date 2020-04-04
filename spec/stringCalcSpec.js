@@ -7,7 +7,7 @@ describe("StringCalc", function () {
     it("should return zero when given empty string", function () {
       expect(calc.add("")).toEqual(0)
     })
-    it("should return zero when given empty string", function () {
+    it("should add the numbers numbers within array", function () {
       expect(calc.add("1,2")).toEqual(3)
     })
     it("It should add 3 unknown numbers", function () {
@@ -21,7 +21,7 @@ describe("StringCalc", function () {
         calc.negativeCheck(["-1"])
       }).toThrow("negatives not allowed: -1 ")
     })
-    it("it should throw exception if negative num", function () {
+    it("it should throw exception if negative numbers plural", function () {
       expect(function () {
         calc.negativeCheck(["-1", "-1"])
       }).toThrow("negatives not allowed: -1 -1 ")
@@ -49,6 +49,12 @@ describe("StringCalc", function () {
   describe("#ignoreThousands", function () {
     it("It should ignore any numbers higher than 1000", function () {
       expect(calc.ignoreThousands([1001, 2])).toEqual([2])
+    })
+  })
+
+  describe('#returnCheckedNumArray', function() {
+    it('should return array of integers under 1k', function() {
+      expect(calc.returnCheckedNumArray("1001,2")).toEqual([2])
     })
   })
 })

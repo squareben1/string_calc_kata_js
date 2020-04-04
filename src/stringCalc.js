@@ -14,8 +14,6 @@ class StringCalc {
 
   splitString(string) {
     if (string.slice(0,2) == '//') {
-      // var char = string[2] 
-      // var char = string.split(/[:;]/)
       var char = string.substring(
         string.lastIndexOf("[")+1, 
         string.lastIndexOf("]")
@@ -26,11 +24,15 @@ class StringCalc {
       return string.split(/\,|\n/) 
     }
   }
-  
-  add(string) {
+
+  returnCheckedNumArray(string) {
     var numbersOverOneThousand = this.intifyArray(this.splitString(string))
     this.negativeCheck(numbersOverOneThousand)
-    var numbers = this.ignoreThousands(numbersOverOneThousand)
+    return this.ignoreThousands(numbersOverOneThousand)
+  }
+  
+  add(string) {
+    var numbers = this.returnCheckedNumArray(string)
     var total = 0
 
     if(string.length < 1) {
