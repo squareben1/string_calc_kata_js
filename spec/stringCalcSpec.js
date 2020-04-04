@@ -1,6 +1,6 @@
 describe('StringCalc', function() {
+  calc = new StringCalc
   describe('Add', function() {
-    calc = new StringCalc
     it('should return single number', function() {
       expect(calc.add("1")).toEqual(1)
     })
@@ -19,15 +19,19 @@ describe('StringCalc', function() {
     it('should allow user to select own delimiter if first 2 chars are //', function() {
       expect(calc.add("//;\n1;2")).toEqual(3)
     })
+
+  })
+
+  describe('#negativeCheck', function() {
     it('it should throw exception if negative num', function() {
       expect(function() {
-        calc.add("-1")
-      }).toThrow("negatives not allowed: -1")
+        calc.negativeCheck(["-1"])
+      }).toThrow("negatives not allowed: -1 ")
     })
     it('it should throw exception if negative num', function() {
       expect(function() {
-        calc.add("-1, -1")
-      }).toThrow("negatives not allowed: -1 -1")
+        calc.negativeCheck(["-1", "-1"])
+      }).toThrow("negatives not allowed: -1 -1 ")
     })
   })
 })

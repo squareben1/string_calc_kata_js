@@ -1,4 +1,17 @@
 class StringCalc {
+  negativeCheck(numbers) {
+    let hasNegative = numbers.some(v => v < 0);
+    if (hasNegative == true) {
+      var errorString = "negatives not allowed: "
+      for (var i = 0; i < numbers.length; i++) {
+        if (numbers[i] < 0) {
+          errorString = errorString.concat(`${numbers[i]} `)
+        }
+      }
+      throw errorString
+    }
+  }
+  
   add(string) {
     // var numbers = []
     if (string.slice(0,2) == '//') {
@@ -7,19 +20,7 @@ class StringCalc {
     } else {
       var numbers = string.split(/\,|\n/) 
     }
-    let hasNegative = numbers.some(v => v < 0);
-
-    if (hasNegative == true) {
-      var errorString = "negatives not allowed: "
-      for (var i = 0; i < numbers.length; i++) {
-        if (numbers[i] < 0) {
-          errorString = errorString.concat(`${numbers[i]}`)
-        }
-      }
-      throw errorString
-    }
-      
-
+    this.negativeCheck(numbers)
     var total = 0
 
     if(string.length < 1) {
