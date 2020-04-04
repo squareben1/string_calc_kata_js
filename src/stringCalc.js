@@ -14,18 +14,23 @@ class StringCalc {
 
   splitString(string) {
     if (string.slice(0,2) == '//') {
-      var char = string[2]
+      // var char = string[2] 
+      // var char = string.split(/[:;]/)
+      var char = string.substring(
+        string.lastIndexOf("[")+1, 
+        string.lastIndexOf("]")
+      )
       var strippedString = string.replace(/(\r\n|\n|\r)/gm, "")
-      return strippedString.substring(3).split(char)
+      return strippedString.substring(char.length+4).split(char)
     } else {
       return string.split(/\,|\n/) 
     }
   }
   
   add(string) {
-    var numbersOneThousand = this.intifyArray(this.splitString(string))
-    this.negativeCheck(numbersOneThousand)
-    var numbers = this.ignoreThousands(numbersOneThousand)
+    var numbersOverOneThousand = this.intifyArray(this.splitString(string))
+    this.negativeCheck(numbersOverOneThousand)
+    var numbers = this.ignoreThousands(numbersOverOneThousand)
     var total = 0
 
     if(string.length < 1) {
@@ -50,7 +55,7 @@ class StringCalc {
 
   ignoreThousands(numbers) {
     function checkNum(num) {
-      return num < 1000;
+      return num < 1000
     }
     return numbers.filter(checkNum)
   }

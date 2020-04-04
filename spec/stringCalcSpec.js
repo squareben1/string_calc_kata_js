@@ -33,7 +33,10 @@ describe("StringCalc", function () {
       expect(calc.splitString("1\n2,3")).toEqual(["1", "2", "3"])
     })
     it("should allow user to select own delimiter if first 2 chars are //", function () {
-      expect(calc.splitString("//;\n1;2")).toEqual(["1", "2"])
+      expect(calc.splitString("//[;]\n1;2")).toEqual(["1", "2"])
+    })
+    it("should allow delimeters to be any length", function () {
+      expect(calc.splitString("//[***]\n1***2***3")).toEqual(["1", "2", "3"])
     })
   })
 
