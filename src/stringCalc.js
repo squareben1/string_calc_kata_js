@@ -1,4 +1,5 @@
 class StringCalc {
+
   negativeCheck(numbers) {
     let hasNegative = numbers.some(v => v < 0);
     if (hasNegative == true) {
@@ -11,15 +12,19 @@ class StringCalc {
       throw errorString
     }
   }
-  
-  add(string) {
-    // var numbers = []
+
+  splitString(string) {
     if (string.slice(0,2) == '//') {
       var char = string[2]
-      var numbers = string.substring(3).split(char)
+      var strippedString = string.replace(/(\r\n|\n|\r)/gm, "")
+      return strippedString.substring(3).split(char)
     } else {
-      var numbers = string.split(/\,|\n/) 
+      return string.split(/\,|\n/) 
     }
+  }
+  
+  add(string) {
+    var numbers = this.splitString(string)
     this.negativeCheck(numbers)
     var total = 0
 
