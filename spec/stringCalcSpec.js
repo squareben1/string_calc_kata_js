@@ -46,8 +46,12 @@ describe("StringCalc", function () {
     })
     it("should allow multiple delimeters of more than 1 character", function () {
       expect(calc.splitString("//[***][%%%]\n1***2%%%3")).toEqual(["1", "2", "3"])
-    }) // 'Make sure you can also handle multiple delimiters with length longer than one char.'
+    })
   })
+
+  // describe('#stripString', function() {
+  //   it('should return a string devoid of ')
+  // })
 
   describe('#intifyArray', function() {
     it('should turn array of strings into array of integers', function() {

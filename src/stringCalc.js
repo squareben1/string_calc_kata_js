@@ -12,27 +12,36 @@ class StringCalc {
     }
   }
 
-  splitString(string) {
-    if (string.slice(0,2) == '//') {
-      var char = string.substring(
-        string.lastIndexOf("[")+1, 
-        string.lastIndexOf("]")
+  selectDelimiter(string) {
+    var char = string.substring(
+      string.lastIndexOf("[")+1, 
+      string.lastIndexOf("]")
+    )
+    // checks for second user generated delimiter
+    var bracketCount = string.split('[').length-1
+    // removes start of string, removes new lines
+    var strippedString = string.substring(char.length+4).replace(/(\r\n|\n|\r)/gm, "")
+
+    if (bracketCount > 1) {
+      var newString = string.substring(0, char.length+4)
+      var charTwo = newString.substring(
+        newString.lastIndexOf("[")+1, 
+        newString.lastIndexOf("]")
       )
-      var bracketCount = string.split('[').length-1
-      
-      if (bracketCount > 1) {
-        var newString = string.substring(0, char.length+4)
-        var charTwo = newString.substring(
-          newString.lastIndexOf("[")+1, 
-          newString.lastIndexOf("]")
-        )
-        var strippedString = string.substring(char.length+4).replace(/(\r\n|\n|\r)/gm, "")
-        return strippedString.substring(char.length+2).replace(charTwo, char).split(char)
-      } else {
-        var strippedString = string.substring(char.length+4).replace(/(\r\n|\n|\r)/gm, "")
-        return strippedString.split(char)
-      }
+      // if 2 delimiters then replaces one with the other, splits 
+      return strippedString.substring(char.length+2).replace(charTwo, char).split(char)
     } else {
+      // split at user-generated character
+      return strippedString.split(char)
+    }
+  }
+
+  splitString(string) { // returns array of seperate strings
+    // checks for user generated delimiter
+    if (string.slice(0,2) == '//') {
+      return this.selectDelimiter(string)
+    } else {
+      // split at commas and new lines by default
       return string.split(/\,|\n/) 
     }
   }
