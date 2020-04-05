@@ -25,5 +25,8 @@ describe('StringCalc Feature', function() {
     it("should allow multiple delimeters", function () {
       expect(calc.add("//[*][%]\n1*2%3")).toEqual(6)
     })
+    it("should allow multiple delimeters of more than 1 character", function () {
+      expect(calc.add("//[***][%%%]\n1***2%%%3")).toEqual(6)
+    }) // 'Make sure you can also handle multiple delimiters with length longer than one char.'
   })
 })
