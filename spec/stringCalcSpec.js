@@ -15,7 +15,7 @@ describe("StringCalc", function () {
     })
   })
 
-  describe('subtract', function() {
+  describe('#subtract', function() {
     it('should subtract two numbers passed in as string', function() {
       expect(calc.subtract('3,2')).toEqual(1)
     })

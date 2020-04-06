@@ -3,10 +3,10 @@ class StringCalc {
     var numbers = this.returnCheckedNumArray(string)
     var total = 0
 
-      for (var i = 0; i < numbers.length; i++) {
-        total += numbers[i]
-      }
-      return total
+    for (var i = 0; i < numbers.length; i++) {
+      total += numbers[i]
+    }
+    return total
   }
 
   subtract(string) {
@@ -14,12 +14,29 @@ class StringCalc {
     return numbers[0] - numbers[1]
   }
 
-  checkLength(string) {
-    if(string.length < 1) {
-      return 0
-    } else if (string.length === 1) {
-      return parseInt(string, 10)
-    }  
+  returnCheckedNumArray(string) {
+    var numbersOverOneThousand = this.intifyArray(this.splitString(string))
+    this.negativeCheck(numbersOverOneThousand)
+    this.checkLength(string)
+    return this.ignoreThousands(numbersOverOneThousand)
+  }
+
+  intifyArray(array) {
+    var integerArray = []
+    for (var i = 0; i < array.length; i++) {
+      integerArray.push(parseInt(array[i], 10))
+    }
+    return integerArray
+  }
+
+  splitString(string) { // returns array of seperate strings
+    // checks for user generated delimiter
+    if (string.slice(0,2) == '//') {
+      return this.selectDelimiter(string)
+    } else {
+      // split at commas and new lines by default
+      return string.split(/\,|\n/) 
+    }
   }
 
   negativeCheck(numbers) {
@@ -33,6 +50,14 @@ class StringCalc {
       }
       throw errorString
     }
+  }
+
+  checkLength(string) {
+    if(string.length < 1) {
+      return 0
+    } else if (string.length === 1) {
+      return parseInt(string, 10)
+    }  
   }
 
   removeChars(string, char) {
@@ -61,31 +86,6 @@ class StringCalc {
       // split at user-generated character
       return strippedString.split(char)
     }
-  }
-
-  splitString(string) { // returns array of seperate strings
-    // checks for user generated delimiter
-    if (string.slice(0,2) == '//') {
-      return this.selectDelimiter(string)
-    } else {
-      // split at commas and new lines by default
-      return string.split(/\,|\n/) 
-    }
-  }
-
-  returnCheckedNumArray(string) {
-    var numbersOverOneThousand = this.intifyArray(this.splitString(string))
-    this.negativeCheck(numbersOverOneThousand)
-    this.checkLength(string)
-    return this.ignoreThousands(numbersOverOneThousand)
-  }
-
-  intifyArray(array) {
-    var integerArray = []
-    for (var i = 0; i < array.length; i++) {
-      integerArray.push(parseInt(array[i], 10))
-    }
-    return integerArray
   }
 
   ignoreThousands(numbers) {
