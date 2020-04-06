@@ -1,5 +1,8 @@
 describe('StringCalc Feature', function() {
   describe('#add', function() { 
+    it('It should add two numbers passed in a string', function() {
+      expect(calc.add("2,3")).toEqual(5) 
+    })
     it('it should throw exception if negative num', function() {
       expect(function() {
         calc.add("-1")
@@ -27,6 +30,11 @@ describe('StringCalc Feature', function() {
     })
     it("should allow multiple delimeters of more than 1 character", function () {
       expect(calc.add("//[***][%%%]\n1***2%%%3")).toEqual(6)
+    })
+  })
+  describe('subtract', function() {
+    it('should subtract two numbers passed in as string', function() {
+      expect(calc.subtract('3,2')).toEqual(1)
     })
   })
 })

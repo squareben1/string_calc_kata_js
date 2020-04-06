@@ -1,4 +1,27 @@
 class StringCalc {
+  add(string) {
+    var numbers = this.returnCheckedNumArray(string)
+    var total = 0
+
+      for (var i = 0; i < numbers.length; i++) {
+        total += numbers[i]
+      }
+      return total
+  }
+
+  subtract(string) {
+    var numbers = this.returnCheckedNumArray(string)
+    return numbers[0] - numbers[1]
+  }
+
+  checkLength(string) {
+    if(string.length < 1) {
+      return 0
+    } else if (string.length === 1) {
+      return parseInt(string, 10)
+    }  
+  }
+
   negativeCheck(numbers) {
     let hasNegative = numbers.some(v => v < 0);
     if (hasNegative == true) {
@@ -12,15 +35,19 @@ class StringCalc {
     }
   }
 
+  removeChars(string, char) {
+    return string.substring(char.length+4).replace(/(\r\n|\n|\r)/gm, "")
+  }
+
   selectDelimiter(string) {
     var char = string.substring(
       string.lastIndexOf("[")+1, 
       string.lastIndexOf("]")
     )
+    // removes start of string, removes new lines
+    var strippedString = this.removeChars(string, char)
     // checks for second user generated delimiter
     var bracketCount = string.split('[').length-1
-    // removes start of string, removes new lines
-    var strippedString = string.substring(char.length+4).replace(/(\r\n|\n|\r)/gm, "")
 
     if (bracketCount > 1) {
       var newString = string.substring(0, char.length+4)
@@ -49,23 +76,8 @@ class StringCalc {
   returnCheckedNumArray(string) {
     var numbersOverOneThousand = this.intifyArray(this.splitString(string))
     this.negativeCheck(numbersOverOneThousand)
+    this.checkLength(string)
     return this.ignoreThousands(numbersOverOneThousand)
-  }
-  
-  add(string) {
-    var numbers = this.returnCheckedNumArray(string)
-    var total = 0
-
-    if(string.length < 1) {
-      return 0
-    } else if (string.length === 1) {
-      return numbers[0]
-    } else {
-      for (var i = 0; i < numbers.length; i++) {
-        total += numbers[i]
-      }
-      return total
-    }
   }
 
   intifyArray(array) {

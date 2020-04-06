@@ -15,6 +15,12 @@ describe("StringCalc", function () {
     })
   })
 
+  describe('subtract', function() {
+    it('should subtract two numbers passed in as string', function() {
+      expect(calc.subtract('3,2')).toEqual(1)
+    })
+  })
+
   describe("#negativeCheck", function () {
     it("it should throw exception if negative num", function () {
       expect(function () {
@@ -68,6 +74,15 @@ describe("StringCalc", function () {
   describe('#returnCheckedNumArray', function() {
     it('should return array of integers under 1k', function() {
       expect(calc.returnCheckedNumArray("1001,2")).toEqual([2])
+    })
+  })
+
+  describe('#checkLength', function() {
+    it('should return zero when passed empty string', function() {
+      expect(calc.checkLength("")).toEqual(0)
+    })
+    it('should return single number as int', function() {
+      expect(calc.checkLength("1")).toEqual(1)
     })
   })
 })
